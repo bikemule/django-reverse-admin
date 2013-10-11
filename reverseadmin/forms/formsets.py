@@ -39,6 +39,14 @@ def reverse_inlineformset_factory(parent_model,
                                   fields=None,
                                   exclude=None,
                                   formfield_callback=lambda f: f.formfield()):
+
+                          parent_model, model, form=ModelForm,
+                          formset=BaseInlineFormSet, fk_name=None,
+                          fields=None, exclude=None, extra=3, can_order=False,
+                          can_delete=True, max_num=None, formfield_callback=None,
+                          widgets=None, validate_max=False, localized_fields=None,
+                          labels=None, help_texts=None, error_messages=None):
+
     kwargs = {
         'form': form,
         'formfield_callback': formfield_callback,
@@ -49,6 +57,22 @@ def reverse_inlineformset_factory(parent_model,
         'fields': fields,
         'exclude': exclude,
         'max_num': 1,
+
+        'form': form,
+        'formfield_callback': formfield_callback,
+        'formset': formset,
+        'extra': extra,
+        'can_delete': can_delete,
+        'can_order': can_order,
+        'fields': fields,
+        'exclude': exclude,
+        'max_num': max_num,
+        'widgets': widgets,
+        'validate_max': validate_max,
+        'localized_fields': localized_fields,
+        'labels': labels,
+        'help_texts': help_texts,
+        'error_messages': error_messages,
     }
     FormSet = modelformset_factory(model, **kwargs)
     FormSet.parent_fk_name = parent_fk_name
