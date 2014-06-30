@@ -6,7 +6,7 @@
 
 #### What should you use/do?
 
-* Not use this snippet. It only handles the admin case, and it would be ideal to have a solution that also handles regular ModelForms. And again, this snippet is extremetly outdated.
+* Not use this snippet. It only handles the admin case, and it would be ideal to have a solution that handles ModelForms generally. And again, this snippet is extremetly outdated.
 * Use generic relations. This functionality is built into Django, however lacks a solution for the one:one case. You can only embed sets, ie, books with tags, not people with a named address.
 * Use [django rest framework](http://www.django-rest-framework.org/). DRF can work as a replacement for Django's forms. It supports the concept of nested resources, however I'm unsure if this extends to object creation. Even if nested object creation works, the admin panel would be unsupported.
 * Use [django-formfield](https://github.com/jsoa/django-formfield). It effectively embeds a standard form into a model, which provides some notion of hierarchy, but it's just a wrapper around a JSONField.
