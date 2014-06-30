@@ -1,3 +1,25 @@
+## Repository exists for reference and is really not intended for use.
+
+* The code probably will not work (define 'working'). The last commit was pushed due to a server panic, so I was commiting unfinished changes to all repos regardless of code state. If you want a 'working' version, refer to commit 34a8b5c935, the original snippet, or Ramusus's updated gist (links below).
+* The original snippet is for django 1.1. Forms/Formsets have changed a lot since then, so I'm not sure if this code would even be compatible with modern versions of Django. This snippet was also created before django introduced generic relations.
+* I think this project is an incorrect solution, along the lines of dajaxice. It solved a specific problem at a certain time, but there are probably more correct solutions.
+
+#### What should you use/do?
+
+* Not use this snippet. It only handles the admin case, and it would be ideal to have a solution that also handles regular ModelForms. And again, this snippet is extremetly outdated.
+* Use generic relations. This functionality is built into Django, however lacks a solution for the one:one case. You can only embed sets, ie, books with tags, not people with a named address.
+* Use [django rest framework](http://www.django-rest-framework.org/). DRF can work as a replacement for Django's forms. It supports the concept of nested resources, however I'm unsure if this extends to object creation. Even if nested object creation works, the admin panel would be unsupported.
+* Use [django-formfield](https://github.com/jsoa/django-formfield). It effectively embeds a standard form into a model, which provides some notion of hierarchy, but it's just a wrapper around a JSONField.
+    * Rendering is meh, as it just coerces form rendering into a list. It doesn't allow for custom form rendering.
+    * This does not create support for relations between models - it's just a form backed by a JSONField which is really a PickleField. 
+* Wait or pretend your use case doesn't exist.
+
+#### wow, such advice, many helpful 
+
+The problem is that embedded/nested models and forms don't fit within the normal ModelForm use case. ModelForms are meant to handle single objects, not multiple hierarchical objects. I have yet to find a comprehensive forms solution for embedded ModelForms. The only way to currently handle this is by composing the forms in views. 
+
+Since there's no package that solves this, the only solution is to write it yourself or wait for someone else to do so. I'm currently trying to create a possible solution, but it's a fairly difficult problem, so don't count on that.
+
 django-reverse-admin
 ====================
 
